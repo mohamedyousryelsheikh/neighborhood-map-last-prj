@@ -107,7 +107,7 @@ class FilterList extends Component {
           />}
         </div>
         <div style={{ float: "left" }}>
-          {this.state.initLocations && (
+          {this.state.locations && (
             <MapContainer markersList={this.state.locations} />
           )}
         </div>
