@@ -1,0 +1,31 @@
+body {
+  background: #e1e3de;
+}
+
+#root {
+  margin: auto;
+
+}
+#root input {
+  line-height: 2;
+  font-size: 18px;
+  height: auto;
+  padding-left: 20px;
+}
+#root ul {
+  margin: 0;
+}
+#root ul li {
+  list-style: none;
+  border: 1px solid #ccc;
+  margin-top: -1px;
+  line-height: 2;
+  padding: 5px 20px;
+  background: white;
+}
+.search-filter-wrapper{
+  z-index: 1;
+  position: absolute;
+  left:0;
+  top:0;
+}
