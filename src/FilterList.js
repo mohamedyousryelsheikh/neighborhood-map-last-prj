@@ -89,7 +89,7 @@ class FilterList extends Component {
       locations: this.state.initLocations
     });
     this.refs.search.value = "";
-  }
+  } 
   render() {
     return (
       <div className="">
