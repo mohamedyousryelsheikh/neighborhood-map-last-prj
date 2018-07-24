@@ -10,28 +10,54 @@ class FilterList extends Component {
     this.state = {
       initLocations: [
         {
+          id:0,
           title: "DownTown Mall",
           name: "DownTown Mall",
           position: {
             lat: 30.0174,
             lng: 31.4124
-          }
+          },
+          isActive:false
         },
         {
+          id:1,
           title: "Portoss cairo Mall marker on map",
           name: "Porto cairo Mall",
           position: {
             lat: 30.0645,
             lng: 31.4245
-          }
+          },
+          isActive:false
         },
         {
+          id:2,
           title: "dukes",
           name: "Dukes",
           position: {
             lat: 30.025158,
             lng: 31.484697
-          }
+          },
+          isActive:false
+        },
+        {
+          id:3,
+          title: "Cairo Festival City",
+          name: "Cairo Festival City",
+          position: {
+            lat: 30.0320,
+            lng: 31.4085
+          },
+          isActive:false
+        },
+        {
+          id:4,
+          title: "Point 90 Mall",
+          name: "Point 90 Mall",
+          position: {
+            lat: 30.0203,
+            lng: 31.4950
+          },
+          isActive:false
         }
       ],
       locations: null,
@@ -89,7 +115,19 @@ class FilterList extends Component {
       locations: this.state.initLocations
     });
     this.refs.search.value = "";
-  } 
+  }
+  handleActiveMarker (idx){
+
+    this.setState({
+      locations: this.state.locations.map((item) => {
+        if (idx !== item.id) {
+        
+          return { ...item, isActive: false };}
+      return { ...item, isActive: true };
+      })
+    });
+  };  
+
   render() {
     return (
       <div className="">
@@ -102,13 +140,13 @@ class FilterList extends Component {
           />
           <button onClick={this.reset.bind(this)}>Reset </button>
           {this.state.locations && <List
-            handleClick={this.getLocation.bind(this)}
+            handleActiveMarker={this.handleActiveMarker.bind(this)}
             items={this.state.locations}
           />}
         </div>
         <div style={{ float: "left" }}>
           {this.state.locations && (
-            <MapContainer markersList={this.state.locations} />
+            <MapContainer  markersList={this.state.locations} handleActiveMarker = {this.handleActiveMarker.bind(this)} />
           )}
         </div>
       </div>
