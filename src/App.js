@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import FilterList from './FilterList'
-import { GoogleApiWrapper } from 'google-maps-react' ;
-import MapContainer from './MapContainer'
+//import { GoogleApiWrapper } from 'google-maps-react' ;
+//import MapContainer from './MapContainer'
 class App extends Component {
   render() {
     return (

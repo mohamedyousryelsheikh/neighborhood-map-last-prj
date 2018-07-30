@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import List from "./List";
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+//import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import MapContainer from "./MapContainer";
 import axios from "axios";
 
@@ -67,6 +67,7 @@ class FilterList extends Component {
     };
   }
   componentWillMount() {
+   
     var that = this;
     this.state.initLocations.map(loc =>
       axios
@@ -77,7 +78,7 @@ class FilterList extends Component {
         )
         .then(res => {
           //persons = res.data;
-          console.log(res.data);
+          //console.log(res.data);
           loc.info = res.data.response;
           //this.setState({ persons });
           that.setState({
@@ -104,29 +105,31 @@ class FilterList extends Component {
     let updatedList = this.state.initLocations;
     updatedList = updatedList.filter(
       item =>
-        item.name.toLocaleLowerCase() ==
+        item.name.toLocaleLowerCase() ===
         element.target.innerText.toLocaleLowerCase()
     );
     this.setState({ locations: updatedList });
   }
   reset(e) {
-    e.preventDefault();
+    //debugger
+    //e.preventDefault();
     this.setState({
       locations: this.state.initLocations
     });
     this.refs.search.value = "";
   }
   handleActiveMarker (idx){
-
     this.setState({
       locations: this.state.locations.map((item) => {
         if (idx !== item.id) {
-        
           return { ...item, isActive: false };}
-      return { ...item, isActive: true };
+        
+          return { ...item, isActive: true };
       })
     });
+   
   };  
+  
 
   render() {
     return (
@@ -139,14 +142,16 @@ class FilterList extends Component {
             onChange={this.filterLocations.bind(this)}
           />
           <button onClick={this.reset.bind(this)}>Reset </button>
-          {this.state.locations && <List
-            handleActiveMarker={this.handleActiveMarker.bind(this)}
-            items={this.state.locations}
-          />}
+          {this.state.locations && 
+            <List
+              handleActiveMarker={this.handleActiveMarker.bind(this)}
+              items={this.state.locations}
+            />
+          }
         </div>
         <div style={{ float: "left" }}>
           {this.state.locations && (
-            <MapContainer  markersList={this.state.locations} handleActiveMarker = {this.handleActiveMarker.bind(this)} />
+            <MapContainer handleReset={this.reset.bind(this)}  markersList={this.state.locations} handleActiveMarker = {this.handleActiveMarker.bind(this)} />
           )}
         </div>
       </div>
